@@ -12,7 +12,7 @@ import com.example.biblioteca.ui.screen.InicioScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
 
 @Composable
-fun AppNavegation(modifier: Modifier = Modifier) {
+fun AppNavigation(modifier: Modifier = Modifier) {
 
     val navController = rememberNavController()
 

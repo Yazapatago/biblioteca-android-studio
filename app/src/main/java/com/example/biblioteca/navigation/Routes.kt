@@ -1,4 +1,4 @@
-package com.example.biblioteca.ui.theme.screen
+package com.example.biblioteca.navigation
 
 import kotlinx.serialization.Serializable
 
