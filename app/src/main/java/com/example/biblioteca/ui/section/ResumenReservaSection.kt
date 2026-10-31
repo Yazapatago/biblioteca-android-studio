@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.biblioteca.R
 import com.example.biblioteca.ui.composable.BotonPrincipal
 import com.example.biblioteca.ui.composable.DatoConIcono
+import com.example.biblioteca.ui.theme.MoradoPrincipal
 import com.example.biblioteca.ui.theme.VerdePrincipal
 
 @Composable
@@ -23,6 +24,7 @@ fun ResumenReservaSection(
     nombreLibro: String,
     fecha: String,
     onVolverInicio: () -> Unit,
+    onVerReservas: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
@@ -51,6 +53,13 @@ fun ResumenReservaSection(
             }
         }
         Spacer(modifier = Modifier.height(24.dp))
+        BotonPrincipal(
+            texto = "Ver Mis Reservas",
+            icono = R.drawable.ic_ver,
+            color = MoradoPrincipal,
+            onClick = onVerReservas
+        )
+        Spacer(modifier = Modifier.height(12.dp))
         BotonPrincipal(
             texto = "Volver al Inicio",
             icono = R.drawable.ic_home,

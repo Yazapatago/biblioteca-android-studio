@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -25,7 +26,8 @@ fun BotonPrincipal(
     @DrawableRes icono: Int,
     color: Color,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    tamanoTexto: TextUnit = 17.sp
 ) {
     Button(
         onClick = onClick,
@@ -44,6 +46,11 @@ fun BotonPrincipal(
             modifier = Modifier.size(22.dp)
         )
         Spacer(modifier = Modifier.width(10.dp))
-        Text(text = texto, fontSize = 17.sp, fontWeight = FontWeight.SemiBold)
+        Text(
+            text = texto,
+            fontSize = tamanoTexto,
+            fontWeight = FontWeight.SemiBold,
+            maxLines = 1
+        )
     }
 }

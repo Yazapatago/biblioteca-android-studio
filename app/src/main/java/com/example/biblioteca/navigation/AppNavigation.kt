@@ -8,8 +8,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.biblioteca.ui.screen.ConfirmacionScreen
 import com.example.biblioteca.ui.screen.DetalleLibroScreen
+import com.example.biblioteca.ui.screen.DetalleReservaScreen
 import com.example.biblioteca.ui.screen.InicioScreen
 import com.example.biblioteca.ui.screen.ListaLibrosScreen
+import com.example.biblioteca.ui.screen.MisReservasScreen
+import com.example.biblioteca.ui.screen.RenovacionExitosaScreen
+import com.example.biblioteca.ui.screen.RenovarReservaScreen
 
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier) {
@@ -50,7 +54,62 @@ fun AppNavigation(modifier: Modifier = Modifier) {
                     navController.navigate(InicioRoute) {
                         popUpTo<InicioRoute> { inclusive = true }
                     }
+                },
+                onVerReservas = {
+                    navController.navigate(MisReservasRoute) {
+                        popUpTo<InicioRoute>()
+                    }
                 }
+            )
+        }
+
+        composable<MisReservasRoute> {
+            MisReservasScreen(
+                onVerReserva = { nombreLibro, fechaReserva, codigoReserva ->
+                    navController.navigate(
+                        DetalleReservaRoute(nombreLibro, fechaReserva, codigoReserva)
+                    )
+                }
+            )
+        }
+
+        composable<DetalleReservaRoute> { backStackEntry ->
+            val ruta = backStackEntry.toRoute<DetalleReservaRoute>()
+            DetalleReservaScreen(
+                nombreLibro = ruta.nombreLibro,
+                fechaReserva = ruta.fechaReserva,
+                codigoReserva = ruta.codigoReserva,
+                onVolver = { navController.popBackStack() },
+                onRenovar = {
+                    navController.navigate(
+                        RenovarReservaRoute(ruta.nombreLibro, ruta.fechaReserva, ruta.codigoReserva)
+                    )
+                },
+                onCancelar = { navController.popBackStack() }
+            )
+        }
+
+        composable<RenovarReservaRoute> { backStackEntry ->
+            val ruta = backStackEntry.toRoute<RenovarReservaRoute>()
+            RenovarReservaScreen(
+                nombreLibro = ruta.nombreLibro,
+                fechaReserva = ruta.fechaReserva,
+                codigoReserva = ruta.codigoReserva,
+                onVolver = { navController.popBackStack() },
+                onConfirmar = { fechaNueva ->
+                    navController.navigate(RenovacionExitosaRoute(ruta.nombreLibro, fechaNueva)) {
+                        popUpTo<MisReservasRoute>()
+                    }
+                }
+            )
+        }
+
+        composable<RenovacionExitosaRoute> { backStackEntry ->
+            val ruta = backStackEntry.toRoute<RenovacionExitosaRoute>()
+            RenovacionExitosaScreen(
+                nombreLibro = ruta.nombreLibro,
+                fechaNueva = ruta.fechaNueva,
+                onVolverReservas = { navController.popBackStack() }
             )
         }
     }

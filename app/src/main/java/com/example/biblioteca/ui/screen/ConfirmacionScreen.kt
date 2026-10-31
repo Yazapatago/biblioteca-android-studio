@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter
 fun ConfirmacionScreen(
     id: Int,
     onVolverInicio: () -> Unit,
+    onVerReservas: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val libro = buscarLibroPorId(id)
@@ -34,7 +35,8 @@ fun ConfirmacionScreen(
         ResumenReservaSection(
             nombreLibro = libro?.nombre ?: "Desconocido",
             fecha = fecha,
-            onVolverInicio = onVolverInicio
+            onVolverInicio = onVolverInicio,
+            onVerReservas = onVerReservas
         )
     }
 }
@@ -42,5 +44,5 @@ fun ConfirmacionScreen(
 @Preview(showBackground = true)
 @Composable
 fun ConfirmacionScreenPreview() {
-    ConfirmacionScreen(id = 1, onVolverInicio = {})
+    ConfirmacionScreen(id = 1, onVolverInicio = {}, onVerReservas = {})
 }

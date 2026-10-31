@@ -16,7 +16,10 @@ import com.example.biblioteca.ui.theme.VerdeMedio
 import com.example.biblioteca.ui.theme.VerdePrincipal
 
 @Composable
-fun ExitoSection(modifier: Modifier = Modifier) {
+fun ExitoSection(
+    modifier: Modifier = Modifier,
+    titulo: String = "Reserva Exitosa"
+) {
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -29,6 +32,6 @@ fun ExitoSection(modifier: Modifier = Modifier) {
             tamano = 170.dp
         )
         Spacer(modifier = Modifier.height(24.dp))
-        Titulo(texto = "Reserva Exitosa", color = VerdePrincipal)
+        Titulo(texto = titulo, color = VerdePrincipal)
     }
 }
