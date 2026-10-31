@@ -1,20 +1,41 @@
 # 📚 Biblioteca — Práctica de Navigation Compose
 
-Aplicación Android desarrollada con **Jetpack Compose** que simula una biblioteca: el usuario explora un catálogo de libros, consulta su detalle y realiza una reserva. El objetivo de la práctica es conectar múltiples pantallas y compartir información entre ellas mediante **Navigation Compose**.
+Aplicación Android desarrollada con **Jetpack Compose** que simula una biblioteca: el usuario explora un catálogo de libros, consulta su detalle, realiza una reserva y gestiona sus reservas. El objetivo de la práctica es conectar múltiples pantallas y compartir información entre ellas mediante **Navigation Compose**.
 
 ## Funcionalidades
 
+### Parte 1 — Biblioteca
 - Pantalla de inicio con acceso al catálogo.
 - Lista de libros con portada y botón para ver el detalle.
 - Detalle del libro recibido como parámetro (`id`) desde la lista.
 - Confirmación de reserva con el libro y la fecha actual.
 - Regreso al inicio limpiando la pila de navegación.
 
+### Parte 2 — Mis Reservas
+- Lista de reservas activas con acceso a su detalle.
+- Detalle de reserva que recibe **múltiples parámetros** (`nombreLibro`, `fechaReserva`, `codigoReserva`).
+- Renovación de reserva que envía la nueva fecha (`fechaNueva`) a la pantalla de éxito.
+- Botones de regreso y cancelación que vuelven a Mis Reservas.
+
 ## Flujo de navegación
 
 ```
 Inicio → Lista de Libros → Detalle del Libro → Confirmación → Inicio
+                                                    ↓
+                    Mis Reservas → Detalle de Reserva → Renovar Reserva → Renovación Exitosa
+                                          ↓ (Cancelar)                            ↓
+                                    Mis Reservas  ←───────────────────────  Mis Reservas
 ```
+
+## Parámetros que viajan entre pantallas
+
+| Parámetro | Descripción |
+|---|---|
+| `id` | Identificador del libro seleccionado |
+| `nombreLibro` | Nombre del libro reservado |
+| `fechaReserva` | Fecha de la reserva original |
+| `codigoReserva` | Código único de la reserva |
+| `fechaNueva` | Nueva fecha al renovar |
 
 ## Tecnologías
 
@@ -29,7 +50,8 @@ El proyecto está organizado en capas y respeta la jerarquía **NavHost → Scre
 
 ```
 com.example.biblioteca
-├── data          → modelo Libro y catálogo de libros
+├── data          → catálogo de libros y reservas de ejemplo
+│   └── model     → modelos Libro y Reserva
 ├── navigation    → rutas y NavHost
 └── ui
     ├── screen      → pantallas (solo llaman secciones)
@@ -46,9 +68,10 @@ com.example.biblioteca
 - `bugfix/*` → correcciones en desarrollo
 - `release/*` → preparación de versiones
 
-## Versión
+## Versiones
 
-**v1.0.0** — Flujo completo de biblioteca: inicio, lista, detalle y confirmación de reserva.
+- **v1.0.0** — Flujo de biblioteca: inicio, lista, detalle y confirmación de reserva.
+- **v1.1.0** — Flujo Mis Reservas: detalle, renovación y cancelación con múltiples parámetros.
 
 ## Ejecución
 
